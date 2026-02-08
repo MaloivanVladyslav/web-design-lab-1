@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyWords - Про додаток</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">EasyWords</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="myMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Головна</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">Про додаток</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.html">Профіль</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Вхід</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Реєстрація</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container my-5">
+        <div class="col-lg-8 mx-auto">
+
+            <div class="text-center mb-5">
+                <i class="bi bi-journal-bookmark-fill text-primary" style="font-size: 80px;"></i>
+                <h1 class="fw-bold mt-3">Про EasyWords</h1>
+                <p class="lead text-muted">
+                    Твій простий та зручний помічник для вивчення англійських слів
+                </p>
+            </div>
+
+            <div class="accordion shadow-sm" id="aboutAccordion">
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                            <strong>Що таке EasyWords?🧐</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#aboutAccordion">
+                        <div class="accordion-body">
+                            <p><strong>EasyWords</strong> — це сучасний та зручний веб-додаток, розроблений спеціально для ефективного вивчення англійської лексики.</p>
+                            <p>Наша головна мета відмовитись від паперових нотатків і зберігати всі нові слова в одному місці.</p>
+                            <p class="mb-0">Основні можливості:</p>
+                            <ul>
+                                <li>Створення власних карток зі словами.</li>
+                                <li>Зручний перегляд та редагування списку.</li>
+                                <li>Доступ до словника з будь-якого пристрою.</li>
+                                <li>Простий та інтуїтивно зрозумілий інтерфейс.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                            <strong>Як користуватися?🧩</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#aboutAccordion">
+                        <div class="accordion-body">
+                            <p class="mb-3">Розпочати навчання дуже просто:</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <i class="bi bi-1-circle-fill text-primary me-2"></i>
+                                    <strong>Авторизація:</strong><br>
+                                    Створіть акаунт або увійдіть, щоб ваші слова зберігалися в хмарі.
+                                </li>
+                                <li class="mb-3">
+                                    <i class="bi bi-2-circle-fill text-primary me-2"></i>
+                                    <strong>Пошук та додавання слів:</strong><br>
+                                    Шукайте вже <strong>збережені слова</strong> через рядок пошуку, або натисніть <span class="badge bg-success"><i class="bi bi-plus-lg"></i> Додати</span>, щоб записати нове слово.
+                                </li>
+                                <li class="mb-3">
+                                    <i class="bi bi-3-circle-fill text-primary me-2"></i>
+                                    <strong>Регулярність:</strong><br>
+                                    Заходьте у додаток щодня, переглядайте та тренуйте пам'ять.
+                                </li>
+                                <li class="mb-3">
+                                    <i class="bi bi-4-circle-fill text-primary me-2"></i>
+                                    <strong>Результат:</strong><br>
+                                    Вже за місяць Ваш словниковий запас значно зросте!
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                            <strong>Які технології використано?👨🏾‍💻</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#aboutAccordion">
+                        <div class="accordion-body">
+                            <p>Цей проект розроблено з використанням сучасного стеку веб-технологій (Frontend), що забезпечує швидку роботу та адаптивність.</p>
+
+                            <div class="row mt-3">
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="fw-bold text-primary">Основний стек:</h6>
+                                    <ul class="list-group list-group-flush small">
+                                        <li class="list-group-item px-0">
+                                            <i class="bi bi-filetype-html text-danger me-2"></i>
+                                            <strong>HTML5</strong> — семантична структура сторінок.
+                                        </li>
+                                        <li class="list-group-item px-0">
+                                            <i class="bi bi-bootstrap-fill text-primary me-2"></i>
+                                            <strong>Bootstrap 5.3</strong> — потужний CSS-фреймворк для стилізації.
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="fw-bold text-primary">Дизайн та UI:</h6>
+                                    <ul class="list-group list-group-flush small">
+                                        <li class="list-group-item px-0">
+                                            <i class="bi bi-phone text-dark me-2"></i>
+                                            <strong>Mobile First</strong> — повна адаптація під смартфони.
+                                        </li>
+                                        <li class="list-group-item px-0">
+                                            <i class="bi bi-bootstrap-fill text-warning me-2"></i>
+                                            <strong>Bootstrap Icons</strong> — векторна графіка та іконки.
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
+                            <div class="alert alert-light border mt-2 text-center text-muted small">
+                                Проект створено в середовищі <strong>Visual Studio Code</strong> в рамках лабораторної роботи з курсу "Web-дизайн"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main> 
+
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <div class="container">
+            <p class="mb-1">&copy; 2026 EasyWords. Всі права захищені.</p>
+            <small class="text-secondary">Лабораторна робота №1. Web-дизайн.</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
