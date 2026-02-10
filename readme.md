@@ -7,4 +7,4 @@
 Розробити статичні Web-сторінки додатку та перевірити коректне їх відображення на екранах різного розміру.
 
 ### Посилання на звіт:
-[Тут буде посилання на Google Drive зі звітом]
+https://drive.google.com/drive/folders/1TaVvYNsXgDQtiGM9uGFFFqnpKW_r_59A
