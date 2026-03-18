@@ -7,4 +7,5 @@
 Розробити функціональність для статичних сторінок Web-додатку першої лабораторної роботи із використанням шаблону MVC
 
 ### Посилання на звіт:
-https://docs.google.com/document/d/1FHqVjSipBsG4rVM1H2jEKmEV1KQnf0DRlasE-av0l-k/edit?usp=sharing
+[https://docs.google.com/document/d/1FHqVjSipBsG4rVM1H2jEKmEV1KQnf0DRlasE-av0l-k/edit?usp=sharing](https://docs.google.com/document/d/1mBOwuCavlwPS93y-UPn7ebktr81ulKXcJjTiwnUfwBg/edit?usp=sharing)
+
