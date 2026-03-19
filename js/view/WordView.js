@@ -1,123 +1,72 @@
 export default class WordView {
     constructor() {
         this.wordList = document.querySelector('.row.g-3');
+        this.cardTemplate = document.getElementById('word-card-template');
         this.form = document.getElementById('addWordForm');
         this.englishInput = document.getElementById('englishWord');
         this.ukrainianInput = document.getElementById('ukrainianWord');
         this.searchInput = document.querySelector('input[type="search"]');
-        
-        this.currentPage = 1;
-        this.itemsPerPage = 9; 
-        this.currentWords = []; 
         this.paginationList = document.querySelector('.pagination');
-        
-        if (this.paginationList) {
-            this.paginationList.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = e.target.closest('.page-link');
-                if (!target) return;
-                
-                if (target.parentElement.classList.contains('disabled')) return;
-                
-                const newPage = parseInt(target.getAttribute('data-page'));
-                if (!isNaN(newPage) && newPage !== this.currentPage) {
-                    this.currentPage = newPage;
-                    this.renderWords(this.currentWords); 
-                }
-            });
-        }
     }
 
-    renderWords(words) {
-        this.currentWords = words; 
-        this.wordList.innerHTML = '';
+    renderWords(wordsToShow, currentPage, totalPages) {
+        this.wordList.innerHTML = ''; 
 
-        if (words.length === 0) {
-            this.wordList.innerHTML = '<div class="col-12 text-center text-muted mt-4">Слів не знайдено</div>';
-            this.renderPagination(0);
+        if (wordsToShow.length === 0) {
+            this.wordList.textContent = 'Слів не знайдено';
+            this.renderPagination(0, 0);
             return;
         }
-
-        const totalPages = Math.ceil(words.length / this.itemsPerPage);
-        
-        if (this.currentPage > totalPages) this.currentPage = totalPages;
-        if (this.currentPage < 1) this.currentPage = 1;
-
-        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-        const endIndex = startIndex + this.itemsPerPage;
-        const wordsToShow = words.slice(startIndex, endIndex);
 
         wordsToShow.forEach(word => {
-            const col = document.createElement('div');
-            col.className = 'col-md-6 col-lg-4';
+            const clone = this.cardTemplate.content.cloneNode(true); 
             
-            const badgeClass = word.isLearned ? 'bg-success' : 'bg-secondary';
-            const badgeText = word.isLearned ? 'Вивчено' : 'Нове';
+            clone.querySelector('.js-english').textContent = word.english;
+            clone.querySelector('.js-ukrainian').textContent = word.ukrainian;
+            
+            const badge = clone.querySelector('.js-badge');
+            badge.textContent = word.badgeText;
+            badge.classList.add(word.badgeClass);
 
-            col.innerHTML = `
-                <div class="card shadow-sm h-100 border-0">
-                    <div class="card-body d-flex justify-content-between align-items-center">
-                        <div>
-                            <h4 class="card-title text-primary mb-1">${word.english}</h4>
-                            <p class="card-text text-muted mb-0">${word.ukrainian}</p>
-                        </div>
-                        <span class="badge ${badgeClass} rounded-pill">${badgeText}</span>
-                    </div>
-                    <div class="card-footer bg-white border-0 text-end">
-                        <button class="btn btn-sm btn-outline-secondary btn-speak" data-word="${word.english}" title="Озвучити">
-                            <i class="bi bi-volume-up"></i>
-                        </button>
-                        <button class="btn btn-sm ${word.isLearned ? 'btn-outline-warning' : 'btn-outline-success'} btn-toggle" data-id="${word.id}" title="${word.isLearned ? 'Повторити' : 'Відмітити як вивчене'}">
-                            <i class="bi ${word.isLearned ? 'bi-arrow-counterclockwise' : 'bi-check-lg'}"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger btn-delete" data-id="${word.id}" title="Видалити">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </div>
-                </div>
-            `;
-            this.wordList.appendChild(col);
+            const toggleBtn = clone.querySelector('.btn-toggle');
+            toggleBtn.classList.add(word.btnClass);
+            toggleBtn.title = word.btnTitle;
+            
+            clone.querySelector('.js-icon-toggle').classList.add(word.iconClass);
+
+            clone.querySelector('.btn-speak').dataset.word = word.english;
+            toggleBtn.dataset.id = word.id;
+            clone.querySelector('.btn-delete').dataset.id = word.id;
+
+            this.wordList.appendChild(clone);
         });
 
-        this.renderPagination(totalPages);
+        this.renderPagination(currentPage, totalPages);
     }
 
-    renderPagination(totalPages) {
+    renderPagination(currentPage, totalPages) {
         if (!this.paginationList) return;
-        
         const navElement = this.paginationList.closest('nav'); 
-
+        
         if (totalPages <= 1) {
-            if (navElement) navElement.style.display = 'none'; 
+            navElement.style.display = 'none'; 
             return;
-        } else {
-            if (navElement) navElement.style.display = 'block'; 
         }
-
+        navElement.style.display = 'block'; 
         this.paginationList.innerHTML = ''; 
 
-        const prevDisabled = this.currentPage === 1 ? 'disabled' : '';
-        this.paginationList.innerHTML += `
-            <li class="page-item ${prevDisabled}">
-                <a class="page-link" href="#" data-page="${this.currentPage - 1}">Попередня</a>
-            </li>
-        `;
+        const createLi = (text, page, isDisabled, isActive) => {
+            const li = document.createElement('li');
+            li.className = `page-item ${isDisabled ? 'disabled' : ''} ${isActive ? 'active' : ''}`;
+            li.innerHTML = `<a class="page-link" href="#" data-page="${page}">${text}</a>`;
+            return li;
+        };
 
+        this.paginationList.appendChild(createLi('Попередня', currentPage - 1, currentPage === 1, false));
         for (let i = 1; i <= totalPages; i++) {
-            const activeClass = i === this.currentPage ? 'active' : '';
-            this.paginationList.innerHTML += `
-                <li class="page-item ${activeClass}">
-                    <a class="page-link" href="#" data-page="${i}">${i}</a>
-                </li>
-            `;
+            this.paginationList.appendChild(createLi(i, i, false, i === currentPage));
         }
-
-        const nextDisabled = this.currentPage === totalPages ? 'disabled' : '';
-        this.paginationList.innerHTML += `
-            <li class="page-item ${nextDisabled}">
-                <a class="page-link" href="#" data-page="${this.currentPage + 1}">Наступна</a>
-            </li>
-        `;
+        this.paginationList.appendChild(createLi('Наступна', currentPage + 1, currentPage === totalPages, false));
     }
 
     bindTableActions(handleToggleStatus, handleDelete) {
@@ -126,19 +75,11 @@ export default class WordView {
             const deleteBtn = event.target.closest('.btn-delete');
             const speakBtn = event.target.closest('.btn-speak');
 
-            if (toggleBtn) {
-                const id = parseInt(toggleBtn.getAttribute('data-id'), 10);
-                handleToggleStatus(id);
-            }
-
-            if (deleteBtn) {
-                const id = parseInt(deleteBtn.getAttribute('data-id'), 10);
-                handleDelete(id);
-            }
-
+            if (toggleBtn) handleToggleStatus(toggleBtn.dataset.id);
+            if (deleteBtn) handleDelete(deleteBtn.dataset.id);
+            
             if (speakBtn) {
-                const textToSpeak = speakBtn.getAttribute('data-word');
-                const utterance = new SpeechSynthesisUtterance(textToSpeak);
+                const utterance = new SpeechSynthesisUtterance(speakBtn.dataset.word);
                 utterance.lang = 'en-US';
                 window.speechSynthesis.speak(utterance);
             }
@@ -148,27 +89,28 @@ export default class WordView {
     bindAddWord(handler) {
         this.form.addEventListener('submit', event => {
             event.preventDefault();
-
-            const englishText = this.englishInput.value.trim();
-            const ukrainianText = this.ukrainianInput.value.trim();
-
-            if (englishText && ukrainianText) {
-                handler(englishText, ukrainianText);
-
-                this.englishInput.value = '';
-                this.ukrainianInput.value = '';
-
-                const modalElement = document.getElementById('addWordModal');
-                const modalInstance = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
-                modalInstance.hide();
-            }
+            handler(this.englishInput.value, this.ukrainianInput.value);
         });
     }
 
+    clearForm() {
+        this.form.reset();
+        bootstrap.Modal.getInstance(document.getElementById('addWordModal')).hide();
+    }
+
     bindSearch(handler) {
-        this.searchInput.addEventListener('input', event => {
-            this.currentPage = 1; 
-            handler(event.target.value);
-        });
+        this.searchInput.addEventListener('input', e => handler(e.target.value));
+    }
+
+    bindPagination(handler) {
+        if (this.paginationList) {
+            this.paginationList.addEventListener('click', e => {
+                e.preventDefault();
+                const target = e.target.closest('.page-link');
+                if (target && !target.parentElement.classList.contains('disabled')) {
+                    handler(parseInt(target.dataset.page, 10));
+                }
+            });
+        }
     }
 }

@@ -6,35 +6,44 @@ export default class WordController {
         this.view.bindTableActions(this.handleToggleStatus, this.handleDelete);
         this.view.bindAddWord(this.handleAddWord);
         this.view.bindSearch(this.handleSearch);
+        this.view.bindPagination(this.handlePageChange);
 
-        this.onWordListChanged(this.model.getWords());
+        this.updateView();
     }
 
-    onWordListChanged = (words) => {
-        this.view.renderWords(words);
+    updateView = () => {
+        const data = this.model.getPaginatedData();
+        this.view.renderWords(data.words, data.currentPage, data.totalPages);
     }
 
-    handleToggleStatus = (id) => {
+    handleToggleStatus = (rawId) => {
+        const id = parseInt(rawId, 10);
         this.model.toggleWordStatus(id);
-        this.onWordListChanged(this.model.getWords());
+        this.updateView();
     }
 
-    handleDelete = (id) => {
+    handleDelete = (rawId) => {
+        const id = parseInt(rawId, 10);
         this.model.deleteWord(id);
-        this.onWordListChanged(this.model.getWords());
+        this.updateView();
     }
 
-    handleAddWord = (english, ukrainian) => {
-        this.model.addWord(english, ukrainian);
-        this.onWordListChanged(this.model.getWords());
+    handleAddWord = (rawEnglish, rawUkrainian) => {
+        const isSuccess = this.model.addWord(rawEnglish, rawUkrainian);
+        
+        if (isSuccess) {
+            this.view.clearForm();
+            this.updateView();
+        }
     }
 
     handleSearch = (query) => {
-        const words = this.model.getWords();
-        const filteredWords = words.filter(word => 
-            word.english.toLowerCase().includes(query.toLowerCase()) || 
-            word.ukrainian.toLowerCase().includes(query.toLowerCase())
-        );
-        this.view.renderWords(filteredWords);
+        this.model.setSearchQuery(query);
+        this.updateView();
+    }
+
+    handlePageChange = (page) => {
+        this.model.setPage(page);
+        this.updateView();
     }
 }
