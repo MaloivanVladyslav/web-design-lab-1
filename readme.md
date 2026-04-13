@@ -1,11 +1,11 @@
-# Лабораторна робота №2
-## Web-дизайн: Розробка функціональності Web-додатка мовою Javascript
+# Лабораторна робота №3
+## Web-дизайн: Розробка Web-додатка засобами Javascript/VueJS
 
 **Виконав:** Студент групи КВ-33 Малойван Владислав
 
 ### Завдання:
-Розробити функціональність для статичних сторінок Web-додатку першої лабораторної роботи із використанням шаблону MVC
+Адаптувати програмний код ЛР№2 до вимог фреймворка VueJS та забезпечити завантаження необхідних даних з Web-сервера
 
 ### Посилання на звіт:
-[https://docs.google.com/document/d/1FHqVjSipBsG4rVM1H2jEKmEV1KQnf0DRlasE-av0l-k/edit?usp=sharing](https://docs.google.com/document/d/1mBOwuCavlwPS93y-UPn7ebktr81ulKXcJjTiwnUfwBg/edit?usp=sharing)
+https://docs.google.com/document/d/1PahkHd9n55QuPMcEuoY2pOeuf4YRj9CW8oIipDgwxh4/edit?usp=sharing
 
